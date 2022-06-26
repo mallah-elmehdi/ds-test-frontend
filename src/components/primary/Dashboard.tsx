@@ -22,15 +22,19 @@ export default (props: Props) => {
 
 	const [openSidebar, setOpenSidebar] = useState(true)
 
+	const {setLoading} = props;
+
 	// close the sidebar in small screens
 	const [isSmallScreen] = useMediaQuery('(max-width: 650px)')
 	useEffect(() => {
+		setLoading(false);
 		isSmallScreen ? setOpenSidebar(false) : setOpenSidebar(true)
 	}, [isSmallScreen])
 
 	// get the currentLocation
 	const currentLocation = useLocation()
 	var { pathname } = currentLocation;
+
 	// formating the pagename
 	var pageName = pathname == "/dashboard" ? "home" : pathname.split("/")[2].split("-").join(" ")
 	// changing the document title

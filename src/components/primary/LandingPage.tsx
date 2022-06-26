@@ -22,7 +22,7 @@ export default (props: Props) => {
             else if (response.status === 401)
                 setRoute("dashboard")
         }).catch(function (error) {
-            setRoute("error/500")
+            setRoute("error")
         })
 
     }, []);

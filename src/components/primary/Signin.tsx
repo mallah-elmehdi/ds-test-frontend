@@ -45,10 +45,10 @@ export default (props: Props) => {
     const [username, setUsername] = useState("")
     const handleUsernameChange = (e: React.SyntheticEvent) => {
         const target = e.target as HTMLButtonElement
+        onClose()
         setUsername(target.value)
         setUsernameError(false)
         setError(false)
-        onClose()
     }
 
     // error managenemt for the username
@@ -58,10 +58,10 @@ export default (props: Props) => {
     const [password, setPassword] = useState("")
     const handlePasswordChange = (e: React.SyntheticEvent) => {
         const target = e.target as HTMLButtonElement
+        onClose()
         setPassword(target.value)
         setPasswordError(false)
         setError(false)
-        onClose()
     }
 
     // error managenemt for the username
@@ -91,12 +91,11 @@ export default (props: Props) => {
                     password: password,
                 }
             ).then((response) => {
-                console.log(response);
-
-                // if (response.status === 202)
-                //     <Navigate to="dashboard">
-
+                if (response.status === 202)
+                    document.cookie = response.data.cookie;
             }).catch((error) => {
+                console.log(error);
+
                 onOpen()
                 setError(true)
                 setErrMessage(error.response.data.detail)
